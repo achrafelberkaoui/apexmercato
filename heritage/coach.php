@@ -3,8 +3,8 @@ require_once "./abstract/abstraitPersonne.php";
 class Coach extends Personne{
         private string $styl;
         private int $annExp;
-        public function __construct($nom, $email, $nationalite, $salaire, $styl, $annExp){
-        parent::__construct($nom, $email, $nationalite, $salaire);
+        public function __construct($nom, $email, $nationalite, $styl, $annExp){
+        parent::__construct($nom, $email, $nationalite);
         $this->styl = $styl;
         $this->annExp = $annExp;
     }

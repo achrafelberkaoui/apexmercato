@@ -1,11 +1,11 @@
 <?php
 
 class BaseDonne {
-    private $user;
-    private $pass;
-    private $db;
-    private $host;
-    private $pdo;
+    private string $user;
+    private string $pass;
+    private string $db;
+    private string $host;
+    private ?PDO $pdo;
     
     public static function database($host,$db,$user,$pass){
         try {

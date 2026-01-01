@@ -1,17 +1,18 @@
 <?php
-require_once "./abstract/abstraitPersonne.php";
+require_once "../abstract/abstraitPersonne.php";
+require_once "../bd/baseDonne.php";
+require_once "../trait/CRUD.php";
 class Player extends Personne{
         private string $Role;
-        private string $Pseudo;
         private float $ValeurMarch;
-        public function __construct($nom, $email, $nationalite, $salaire, $Role, $Pseudo, $ValMa){
-        parent::__construct($nom, $email, $nationalite, $salaire);
+        public function __construct($nom, $email, $nationalite, $Role, $ValMa){
+        parent::__construct($nom, $email, $nationalite);
         $this->Role = $Role;
-        $this->Pseudo = $Pseudo;
         $this->ValeurMarch = $ValMa;
     }
+     use CRUD;
     public function getAnnualCost(){
-       return ($this->salaire * 0.12);
+       return ($this->ValeurMarch * 0.12);
     }
 
 }

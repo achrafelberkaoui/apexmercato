@@ -1,0 +1,84 @@
+<?php
+require_once "header.php";
+require_once "../bd/baseDonne.php";
+require_once "../heritage/player.php";
+
+$errors = [];
+if(isset($_POST['submit'])){
+if(empty(trim($_POST['name']))){
+    $errors['name'] = "Veuillez entrer Pseudo de Joueur";
+}else{
+    $name = trim($_POST['name']);
+}
+if(empty(trim($_POST['email']))){
+    $errors['email'] = "Veuillez entrer Pseudo de Joueur";
+}elseif (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
+    $errors ['email']= "email no valide";
+}else{
+    $email = trim($_POST['email']);
+}
+
+if(empty(trim($_POST['nationalite']))){
+    $errors['nationalite'] = "Veuillez entrer la nationalite de Joueur";
+}else{
+    $nationalite = trim($_POST['nationalite']);
+}
+
+    if(empty($_POST['role'])){
+        $errors['role'] = "Veuillez choisir le rôle";
+    }else{
+        $role = $_POST['role'];
+    }
+
+    if(empty($_POST['valeur_marches']) || $_POST['valeur_marches'] <= 0){
+        $errors['valeur_marches'] = "Veuillez entrer une valeur valide";
+    }else{
+        $valeur = $_POST['valeur_marches'];
+    }
+    if(empty($errors)){
+    $data = [
+        "name" => $name,
+        "email" => $email,
+        "nationalite" => $nationalite,
+        "role_esport" => $role,
+        "valeur_marchande" => $valeur
+    ];
+        $jouer = new Player($name, $email,  $nationalite, $role, $valeur);
+        $jouer->creatNew($data);
+    };
+}
+?>
+
+<div class="form-container">
+    <h2>Ajouter un Joueur</h2>
+    <form id="addPlayerForm" method= "POST">
+        <label>Pseudo :</label>
+        <input type="text" name="name" required>
+        <label>Email :</label>
+        <input type="email" name="email" required>
+
+        <label>Rôle :</label>
+        <select name="role" required>
+            <option value="">Sélectionner le rôle</option>
+            <option value="Top">Top</option>
+            <option value="Jungle">Jungle</option>
+            <option value="Mid">Mid</option>
+            <option value="ADC">ADC</option>
+            <option value="Support">Support</option>
+        </select>
+
+        <label>Nationalité :</label>
+        <input type="text" name="nationalite" required>
+
+        <label>Valeur Marchande (€) :</label>
+        <input type="number" name="valeur_marches" required>
+
+        <button type="submit" name="submit">Ajouter Joueur</button>
+    </form>
+
+
+</div>
+
+<?php
+require_once "footer.php";
+?>
