@@ -11,7 +11,7 @@ if(empty(trim($_POST['name']))){
     $name = trim($_POST['name']);
 }
 if(empty(trim($_POST['email']))){
-    $errors['email'] = "Veuillez entrer Pseudo de Joueur";
+    $errors['email'] = "Veuillez entrer email de Joueur";
 }elseif (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
     $errors ['email']= "email no valide";
 }else{
@@ -35,23 +35,44 @@ if(empty(trim($_POST['nationalite']))){
     }else{
         $valeur = $_POST['valeur_marches'];
     }
+
+    $id_equip = $_POST['id_equip'];
+
+
+
     if(empty($errors)){
     $data = [
         "name" => $name,
         "email" => $email,
         "nationalite" => $nationalite,
-        "role_esport" => $role,
-        "valeur_marchande" => $valeur
+        "role" => $role,
+        "valeur_marches" => $valeur,
+        "equipe_id" => $id_equip
     ];
-        $jouer = new Player($name, $email,  $nationalite, $role, $valeur);
+
+        $jouer = new Player($con, $name, $email,  $nationalite, $role, $valeur,$id_equip);
+            if(!$jouer->equipeExists($id_equip)){
+            echo "aucun equipe id";
+            exit;
+            }
+
+
         $jouer->creatNew($data);
+        echo "<p style='color:green'>Joueur ajoutée avec succès</p>";
+        header("refresh:2, url=adminDash.php");
+    }else{
+        foreach ($errors as $err) {
+             echo "<p style='color:red'>$err</p>";
+            }
+            exit;
     };
+
 }
 ?>
 
 <div class="form-container">
     <h2>Ajouter un Joueur</h2>
-    <form id="addPlayerForm" method= "POST">
+    <form action="ajouteJou.php" id="addPlayerForm" method= "POST">
         <label>Pseudo :</label>
         <input type="text" name="name" required>
         <label>Email :</label>
@@ -69,6 +90,9 @@ if(empty(trim($_POST['nationalite']))){
 
         <label>Nationalité :</label>
         <input type="text" name="nationalite" required>
+        
+        <label>Id Equipe :</label>
+        <input type="number" name="id_equip" required>
 
         <label>Valeur Marchande (€) :</label>
         <input type="number" name="valeur_marches" required>

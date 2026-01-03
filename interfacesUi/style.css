@@ -196,10 +196,12 @@ button, .btn-addJou{
     background:linear-gradient(135deg,#4f9cff,#7dd3fc);
     color:#0f172a;
     margin-right:5px;
+      text-decoration: none;
 }
 
 button, .btn-addJou:hover{
     opacity:.9;
+    text-decoration: none;
 }
 
 
@@ -454,3 +456,127 @@ hr{
     border-top:1px solid rgba(255,255,255,.2);
 }
 
+
+.team-form-container{
+    max-width:520px;
+    margin:40px auto;
+    padding:30px;
+    background:#0f172a;
+    color:#fff;
+    border-radius:14px;
+    box-shadow:0 10px 25px rgba(0,0,0,.45);
+}
+
+.team-form-container h2{
+    text-align:center;
+    margin-bottom:18px;
+}
+/* Form */
+#teamAddForm{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+}
+
+#teamAddForm label{
+    font-weight:600;
+}
+
+#teamAddForm input,
+#teamAddForm textarea{
+    padding:10px;
+    border-radius:8px;
+    border:none;
+    background:#1b263b;
+    color:#fff;
+    resize:none;
+}
+
+#teamAddForm input:focus,
+#teamAddForm textarea:focus{
+    outline:none;
+    box-shadow:0 0 6px #4f9cff;
+}
+
+/* Button */
+#teamAddForm button{
+    margin-top:8px;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:600;
+    background:linear-gradient(135deg,#4f9cff,#7dd3fc);
+    color:#0f172a;
+    transition:.25s;
+}
+
+#teamAddForm button:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 20px rgba(125,211,252,.35);
+}
+
+/* mod budget */
+.budget-form-container{
+    max-width:520px;
+    margin:40px auto;
+    padding:30px;
+    background:#0f172a;
+    color:#fff;
+    border-radius:14px;
+    box-shadow:0 10px 25px rgba(0,0,0,.45);
+}
+
+.budget-form-container h2{
+    text-align:center;
+    margin-bottom:18px;
+}
+
+#budgetUpdateForm{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+}
+
+#budgetUpdateForm label{
+    font-weight:600;
+}
+
+#budgetUpdateForm input{
+    padding:10px;
+    border-radius:8px;
+    border:none;
+    background:#1b263b;
+    color:#fff;
+}
+
+#budgetUpdateForm input[readonly]{
+    opacity:.75;
+    cursor:not-allowed;
+}
+
+#budgetUpdateForm input:focus{
+    outline:none;
+    box-shadow:0 0 6px #4f9cff;
+}
+/* a{
+      text-decoration: none;
+} */
+
+/* Button */
+#budgetUpdateForm button{
+    margin-top:8px;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:600;
+    background:linear-gradient(135deg,#4f9cff,#7dd3fc);
+    color:#0f172a;
+    transition:.25s;
+}
+
+#budgetUpdateForm button:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 20px rgba(125,211,252,.35);
+}

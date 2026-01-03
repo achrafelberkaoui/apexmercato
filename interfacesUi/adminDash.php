@@ -1,5 +1,19 @@
 <?php
 require_once "header.php";
+require_once "../bd/baseDonne.php";
+require_once "../heritage/player.php";
+require_once "../heritage/coach.php";
+require_once "../heritage/equipe.php";
+$playerObj = new Player($con, "", "", "", "", 0, 0);
+$players = $playerObj->all();
+
+$coachObj = new Coach($con, "", "", "", "", 0, 0);
+$coachs = $coachObj->all();
+
+$equipObj = new Equipe($con);
+$equips = $equipObj->all();
+
+
 ?>
 
 <div class="dashboard-container">
@@ -20,7 +34,7 @@ require_once "header.php";
 
         <!-- ROSTER -->
         <section id="roster" class="page active">
-            <h3>Gestion du Roster</h3>
+            <h3>PLAYERS</h3>
            <a href="ajouteJou.php" class = "btn-addJou" >Ajouter Joueur</a>
            <a href="ajouteCoach.php" class = "btn-addJou" >Ajouter Coach</a>
             <table>
@@ -32,25 +46,44 @@ require_once "header.php";
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody><?php foreach($players as $player): ?>
                     <tr>
-                        <td>DragonSlayer</td>
-                        <td>Joueur</td>
-                        <td>France</td>
+                        <td><?= htmlspecialchars($player['name']) ?></td>
+                        <td><?= htmlspecialchars($player['role']) ?></td>
+                        <td><?= htmlspecialchars($player['nationalite']) ?></td>
                         <td>
-                            <button>Editer</button>
-                            <button>Supprimer</button>
+                            <a class = "btn-addJou" href="editPlayer.php?id=<?= $player['id'] ?>">Editer</a>
+                            <a class = "btn-addJou" href="deletePlayer.php?id=<?= $player['id'] ?>" onclick="return confirm('Supprimer ce joueur?')">Supprimer</a>
                         </td>
                     </tr>
+                    <?php endforeach; ?>
+
+                </tbody>
+            </table>
+
+            <!-- coach -->
+                 <h3>COACHS</h3>
+                <table>
+                <thead>
                     <tr>
-                        <td>CoachMaster</td>
-                        <td>Coach</td>
-                        <td>Allemagne</td>
+                        <th>Pseudo</th>
+                        <th>Style</th>
+                        <th>Nationalité</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody><?php foreach($coachs as $coach): ?>
+                    <tr>
+                        <td><?= htmlspecialchars($coach['name']) ?></td>
+                        <td><?= htmlspecialchars($coach['style_coach']) ?></td>
+                        <td><?= htmlspecialchars($coach['nationalite']) ?></td>
                         <td>
-                            <button>Editer</button>
-                            <button>Supprimer</button>
+                            <a class = "btn-addJou" href="editCoach.php?id=<?= $coach['id'] ?>">Editer</a>
+                            <a class = "btn-addJou" href="deleteCoach.php?id=<?= $coach['id'] ?>" onclick="return confirm('Supprimer ce coach?')">Supprimer</a>
                         </td>
                     </tr>
+                    <?php endforeach; ?>
+
                 </tbody>
             </table>
         </section>
@@ -58,7 +91,7 @@ require_once "header.php";
         <!-- TEAMS -->
         <section id="teams" class="page">
             <h3>Management des Équipes</h3>
-            <button onclick="alert('Ajouter une équipe')">Ajouter Équipe</button>
+           <a href="ajoutEquip.php" class = "btn-addJou" >Ajouter Équipe</a>
             <table>
                 <thead>
                     <tr>
@@ -69,22 +102,19 @@ require_once "header.php";
                     </tr>
                 </thead>
                 <tbody>
+                    <?php foreach($equips as $equip): ?>
                     <tr>
-                        <td>G2</td>
-                        <td>5 000 000 €</td>
-                        <td>Maxime</td>
+                    
+
+                        <td><?= htmlspecialchars($equip['name']) ?></td>
+                        <td><?= htmlspecialchars($equip['budget']) . "$" ?></td>
+                        <td><?= htmlspecialchars($equip['manager']) ?></td>
                         <td>
-                            <button>Editer</button>
+                            <a class = "btn-addJou" href="editEquipe.php?id=<?= $equip['id'] ?>">Editer</a>
+                            <a class = "btn-addJou" href="editBudget.php?id=<?= $equip['id'] ?>">Modifier Budget</a>
                         </td>
                     </tr>
-                    <tr>
-                        <td>Karmine Corp</td>
-                        <td>3 200 000 €</td>
-                        <td>Lucas</td>
-                        <td>
-                            <button>Editer</button>
-                        </td>
-                    </tr>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
         </section>

@@ -2,21 +2,43 @@
 
 trait CRUD
 {
-    protected PDO $pdo;
+    protected PDO $con;
     protected string $table;
 
-    public function conne(PDO $pdo) : void{
-        $this->pdo = $pdo;
+    public function conne(PDO $con, $table) : void{
+        $this->con = $con;
+        $this->table = $table;
     }
 
-    public function creatNew(array $Data) : bool{
-        var_dump($this);
-        $keeys = implode(",", array_keys($Data));
-        $valuues = ":" . implode(",:", array_keys($Data));
-        $sql = "INSERT INTO {this->table}($keeys) VALUES($valuues)";
-        $stmt = $this->pdo->prepare($sql);
-        return $stmt->execute();
+    public function creatNew(array $data) : bool{
+        $keeys = implode(",", array_keys($data));
+        $valuues = ":" . implode(",:", array_keys($data));
+        $sql = "INSERT INTO {$this->table}($keeys) VALUES($valuues)";
+        $stmt = $this->con->prepare($sql);
+        return $stmt->execute($data);
 
+    }
+    public function update($id, $data): bool{
+        $set = "";
+        foreach ($data as $key => $value) {
+            $set = $set . "$key = :$key,";
+        }
+        $set = rtrim($set, ",");
+        $sql = "UPDATE {$this->table} SET $set WHERE id = :id";
+        $data['id'] = $id;
+
+        $stmt = $this->con->prepare($sql);
+        return $stmt->execute($data);
+    }
+        public function delete($id): bool {
+        $sql = "DELETE FROM {$this->table} WHERE id = :id";
+        $stmt = $this->con->prepare($sql);
+        return $stmt->execute([":id"=>$id]);
+    }
+        public function all(): array {
+        $sql = "SELECT * FROM {$this->table} ORDER BY id DESC";
+        $stmt = $this->con->query($sql);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
 
