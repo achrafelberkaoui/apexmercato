@@ -21,6 +21,17 @@ $equips = $equipObj->all();
 $contrat = new Contract($con, null, null,null, "");
 $contratss = $contrat->allContracts();
 
+$transferts = $con->query("
+    SELECT t.*, 
+           e1.name AS equipeA, e2.name AS equipeB, 
+           j.name AS joueur_name, co.name AS coach_name
+    FROM transfert t
+    LEFT JOIN equipe e1 ON t.equipeA_id = e1.id
+    LEFT JOIN equipe e2 ON t.equipeB_id = e2.id
+    LEFT JOIN joueur j ON t.joueur_id = j.id
+    LEFT JOIN coach co ON t.coach_id = co.id
+    ORDER BY t.id DESC")->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 
 <div class="dashboard-container">
@@ -159,21 +170,21 @@ $contratss = $contrat->allContracts();
             <table>
                 <thead>
                     <tr>
-                        <th>Joueur</th>
+                        <th>Joueur/Coach</th>
                         <th>Équipe départ</th>
                         <th>Équipe arrivée</th>
-                        <th>Montant</th>
                         <th>Statut</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>DragonSlayer</td>
-                        <td>G2</td>
-                        <td>Karmine Corp</td>
-                        <td>500 000 €</td>
+                    <?php foreach($transferts as $tr): ?>
+                        <tr>
+                        <td><?= $tr['joueur_name'] ?? $tr['coach_name'] ?? '-' ?></td>
+                        <td><?=$tr['equipeA']?></td>
+                        <td><?=$tr['equipeB']?></td>
                         <td>Confirmé</td>
                     </tr>
+                        <?php endforeach; ?>
                 </tbody>
             </table>
         </section>
