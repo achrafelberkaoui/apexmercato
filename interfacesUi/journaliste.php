@@ -1,16 +1,6 @@
 <?php
 require_once "header.php";
 ?>
-<!-- dashboard-journaliste.php -->
-<?php
-// header.php déjà inclus
-?>
-
-<!-- dashboard-journaliste.php -->
-<?php
-// header.php déjà inclus
-?>
-
 <div class="journal-dashboard-container">
 
     <!-- Sidebar Navigation -->

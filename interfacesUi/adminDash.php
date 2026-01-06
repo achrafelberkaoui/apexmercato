@@ -1,9 +1,14 @@
 <?php
 require_once "header.php";
-require_once "../bd/baseDonne.php";
-require_once "../heritage/player.php";
-require_once "../heritage/coach.php";
-require_once "../heritage/equipe.php";
+require_once "../autloading/Autloading.php";
+use Bd\BaseDonne;
+use Heritage\Player;
+use Heritage\Equipe;
+use Heritage\Coach;
+use ReadonlyContrat\Contract;
+
+
+$con = BaseDonne::database();
 $playerObj = new Player($con, "", "", "", "", 0, 0);
 $players = $playerObj->all();
 
@@ -13,6 +18,8 @@ $coachs = $coachObj->all();
 $equipObj = new Equipe($con);
 $equips = $equipObj->all();
 
+$contrat = new Contract($con, null, null,null, "");
+$contratss = $contrat->allContracts();
 
 ?>
 
@@ -122,30 +129,25 @@ $equips = $equipObj->all();
         <!-- CONTRACTS -->
         <section id="contracts" class="page">
             <h3>Contrôle Contractuel</h3>
-            <button onclick="alert('Créer un contrat')">Créer Contrat</button>
+            <a href="contracts.php" class = "btn-addJou" onclick="alert('Créer un contrat')">Créer Contrat</a>
             <table>
                 <thead>
                     <tr>
-                        <th>Joueur/Coach</th>
-                        <th>Salaire</th>
-                        <th>Clause de rachat</th>
-                        <th>Date début</th>
-                        <th>Date fin</th>
-                        <th>Actions</th>
+                        <th>Type</th>
+                        <th>Nom</th>
+                        <th>Date contrat</th>
                     </tr>
                 </thead>
                 <tbody>
+                        <?php foreach($contratss as $cont): ?>
                     <tr>
-                        <td>DragonSlayer</td>
-                        <td>120 000 € / an</td>
-                        <td>500 000 €</td>
-                        <td>01/01/2025</td>
-                        <td>31/12/2025</td>
+                    
+                        <td><?= !empty($cont['joueur_name']) ? "joueur" : "coach" ?></td>
+                        <td><?= $cont['joueur_name']?:$cont['coach_name'] ?></td>
+                        <td><?= htmlspecialchars($cont['date_contrat']) ?></td>
                         <td>
-                            <button>Editer</button>
-                            <button>Supprimer</button>
-                        </td>
                     </tr>
+                        <?php endforeach ; ?>
                 </tbody>
             </table>
         </section>
@@ -153,7 +155,7 @@ $equips = $equipObj->all();
         <!-- TRANSFERS -->
         <section id="transfers" class="page">
             <h3>Exécution des Transferts</h3>
-            <button onclick="alert('Lancer transfert')">Nouveau Transfert</button>
+            <a href="transfPlayer.php" class = "btn-addJou" onclick="alert('Lancer transfert')">Nouveau Transfert</a>
             <table>
                 <thead>
                     <tr>
@@ -162,7 +164,6 @@ $equips = $equipObj->all();
                         <th>Équipe arrivée</th>
                         <th>Montant</th>
                         <th>Statut</th>
-                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -172,9 +173,6 @@ $equips = $equipObj->all();
                         <td>Karmine Corp</td>
                         <td>500 000 €</td>
                         <td>Confirmé</td>
-                        <td>
-                            <button>Voir</button>
-                        </td>
                     </tr>
                 </tbody>
             </table>

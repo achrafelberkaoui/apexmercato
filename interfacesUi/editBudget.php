@@ -1,7 +1,12 @@
 <?php
 require_once "header.php";
-require_once "../bd/baseDonne.php";
-require_once "../heritage/equipe.php";
+require_once "../autloading/Autloading.php";
+use Bd\BaseDonne;
+use Heritage\Equipe;
+
+
+
+$con = BaseDonne::database();
 if(!isset($_GET['id'])){
     die("id manque");
 };
@@ -25,10 +30,7 @@ $errors = [];
         echo "<p style='color:green'>Budget Modifier avec succès</p>";
         header("refresh:2, url=adminDash.php");
     }
-
     }
-
-
 ?>
 
 <div class="budget-form-container">

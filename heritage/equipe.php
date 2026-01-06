@@ -1,8 +1,11 @@
 <?php
-require_once "../bd/baseDonne.php";
-require_once "../trait/CRUD.php";
+namespace Heritage;
+use Bd\BaseDonne;
+use Trait\Crud;
+use PDO;
+require_once "../autloading/Autloading.php";
 class Equipe {
-    use CRUD;
+    use Crud;
 
     public function __construct(PDO $con){
         $this->conne($con, "equipe");
@@ -14,11 +17,6 @@ class Equipe {
         return $stmt->fetchColumn() > 0;
     }
 
-    public function getById(int $id): array|false {
-        $stmt = $this->con->prepare("SELECT * FROM equipe WHERE id = ?");
-        $stmt->execute([$id]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
-    }
 
     public function modifBudget(int $id, float $budget): bool {
         $stmt = $this->con->prepare("UPDATE equipe SET budget = ? WHERE id = ?");

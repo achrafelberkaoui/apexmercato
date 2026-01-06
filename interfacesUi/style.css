@@ -580,3 +580,267 @@ hr{
     transform:translateY(-2px);
     box-shadow:0 10px 20px rgba(125,211,252,.35);
 }
+
+/* contrat */
+.contract-form-container {
+  max-width: 520px;
+  margin: 40px auto;
+  padding: 25px;
+  border-radius: 16px;
+  background: #1b263b;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  font-family: Arial, sans-serif;
+}
+
+.contract-form-container h2 {
+  text-align: center;
+  margin-bottom: 18px;
+  letter-spacing: .5px;
+}
+
+.contract-form-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contract-form-container label {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.contract-form-container input[type="radio"] {
+  margin-right: 6px;
+}
+
+.contract-form-container select,
+.contract-form-container input[type="date"] {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  outline: none;
+}
+
+.contract-form-container select:focus,
+.contract-form-container input[type="date"]:focus {
+  border-color: #4c87ff;
+}
+
+#playerSelect,
+#coachSelect {
+  margin-top: 5px;
+}
+
+.contract-form-container button {
+  margin-top: 10px;
+  padding: 11px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  background: #4c87ff;
+  color: white;
+  transition: .25s;
+}
+
+.contract-form-container button:hover {
+  transform: translateY(-1px);
+  background: #3569e6;
+}
+
+
+/* edit player */
+.player-edit-container{
+    max-width:520px;
+    margin:40px auto;
+    padding:30px;
+    background:#0f172a;
+    color:#fff;
+    border-radius:14px;
+    box-shadow:0 10px 25px rgba(0,0,0,.45);
+}
+
+.player-edit-container h2{
+    text-align:center;
+    margin-bottom:18px;
+}
+
+#playerEditForm{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+}
+
+#playerEditForm label{
+    font-weight:600;
+}
+
+#playerEditForm input,
+#playerEditForm select{
+    padding:10px;
+    border-radius:8px;
+    border:none;
+    background:#1b263b;
+    color:#fff;
+}
+
+#playerEditForm input:focus,
+#playerEditForm select:focus{
+    outline:none;
+    box-shadow:0 0 6px #4f9cff;
+}
+
+/* Button */
+#playerEditForm button{
+    margin-top:8px;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:600;
+    background:linear-gradient(135deg,#4f9cff,#7dd3fc);
+    color:#0f172a;
+    transition:.25s;
+}
+
+#playerEditForm button:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 20px rgba(125,211,252,.35);
+}
+
+/* edit coach */
+.coach-edit-container{
+    max-width:520px;
+    margin:40px auto;
+    padding:30px;
+    background:#0f172a;
+    color:#fff;
+    border-radius:14px;
+    box-shadow:0 10px 25px rgba(0,0,0,.45);
+}
+
+.coach-edit-container h2{
+    text-align:center;
+    margin-bottom:18px;
+}
+
+#coachEditForm{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+}
+
+#coachEditForm label{
+    font-weight:600;
+}
+
+#coachEditForm input{
+    padding:10px;
+    border-radius:8px;
+    border:none;
+    background:#1b263b;
+    color:#fff;
+}
+
+#coachEditForm input:focus{
+    outline:none;
+    box-shadow:0 0 6px #4f9cff;
+}
+
+/* Button */
+#coachEditForm button{
+    margin-top:8px;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:600;
+    background:linear-gradient(135deg,#4f9cff,#7dd3fc);
+    color:#0f172a;
+    transition:.25s;
+}
+
+#coachEditForm button:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 20px rgba(125,211,252,.35);
+}
+
+/* transfert */
+
+/* Container form */
+.form-box {
+    width: 90%;
+    max-width: 600px;
+    margin: 20px auto;
+    background:linear-gradient(135deg,#2c4462,#163a4a);
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    font-family: Arial, sans-serif;
+}
+
+/* Headings */
+.form-box h3 {
+    text-align: center;
+    color: #222;
+    margin-bottom: 20px;
+    font-size: 22px;
+}
+
+/* Labels */
+.form-box label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Inputs and selects */
+.form-box input[type="text"],
+.form-box input[type="number"],
+.form-box input[type="date"],
+.form-box select {
+    width: 100%;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+/* Radio buttons inline */
+.form-box input[type="radio"] {
+    margin-right: 5px;
+}
+
+/* Submit button */
+.form-box button {
+    margin-top: 20px;
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.form-box button:hover {
+    background-color: #0056b3;
+}
+
+/* Select divs (joueur / coach) */
+#playerDiv, #coachDiv {
+    margin-top: 10px;
+}
+
+/* Messages */
+.form-box p {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+

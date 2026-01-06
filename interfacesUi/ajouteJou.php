@@ -1,8 +1,13 @@
 <?php
 require_once "header.php";
-require_once "../bd/baseDonne.php";
-require_once "../heritage/player.php";
+require_once "../autloading/Autloading.php";
+use Bd\BaseDonne;
+use Heritage\Player;
+use Trait\Crud;
+use Heritage\Equipe;
 
+
+$con = BaseDonne::database();
 $errors = [];
 if(isset($_POST['submit'])){
 if(empty(trim($_POST['name']))){

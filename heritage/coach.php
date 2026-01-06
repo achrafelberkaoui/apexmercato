@@ -1,11 +1,15 @@
 <?php
-require_once "../abstract/abstraitPersonne.php";
-require_once "../bd/baseDonne.php";
-require_once "../trait/CRUD.php";
+namespace Heritage;
+use Abstract\Personne;
+use Bd\BaseDonne;
+use PDO;
+use Trait\Crud;
+require_once "../autloading/Autloading.php";
+
 class Coach extends Personne{
         private string $styl;
         private $annExp;
-        use CRUD;
+        use Crud;
         public function __construct(PDO $con,$nom, $email, $nationalite, $styl, $annExp, $id_equipe){
         $this->conne($con, "coach");
         parent::__construct($nom, $email, $nationalite, $id_equipe);

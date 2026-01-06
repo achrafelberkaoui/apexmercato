@@ -1,11 +1,15 @@
 <?php
-require_once "../abstract/abstraitPersonne.php";
-require_once "../bd/baseDonne.php";
-require_once "../trait/CRUD.php";
+namespace Heritage;
+use Abstract\Personne;
+use Bd\BaseDonne;
+use Trait\Crud;
+use PDO;
+require_once "../autloading/Autloading.php";
+
 class Player extends Personne{
         private string $Role;
         private float $ValeurMarch;
-     use CRUD;
+     use Crud;
     public function __construct(PDO $pdo, $nom, $email, $nationalite, $role, $valeur, $id_equipe)
     {
         $this->conne($pdo, "joueur");

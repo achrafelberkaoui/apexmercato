@@ -1,10 +1,12 @@
 <?php
 require_once "header.php";
-require_once "../bd/baseDonne.php";
-require_once "../trait/CRUD.php";
-require_once "../heritage/equipe.php";
+require_once "../autloading/Autloading.php";
+use Trait\Crud;
+use Heritage\Equipe;
+use Bd\BaseDonne;
 
 $errors = [];
+$con = BaseDonne::database();
 if($_SERVER['REQUEST_METHOD']==="POST"){
     
 if(empty(trim($_POST['team_name']))){

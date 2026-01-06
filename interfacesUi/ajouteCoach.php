@@ -1,8 +1,11 @@
 <?php
 require_once "header.php";
-require_once "../bd/baseDonne.php";
-require_once "../heritage/coach.php";
+use Heritage\Coach;
+use Bd\BaseDonne;
 
+
+
+$con = BaseDonne::database();
 $errors = [];
 if(isset($_POST['submit'])){
 if(empty(trim($_POST['name']))){

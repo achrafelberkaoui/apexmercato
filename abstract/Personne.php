@@ -1,4 +1,5 @@
 <?php
+namespace Abstract;
 abstract class Personne{
         protected string $nom;
         protected string $email;

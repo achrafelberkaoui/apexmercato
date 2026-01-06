@@ -1,6 +1,8 @@
 <?php
+namespace Trait;
+use PDO;
 
-trait CRUD
+trait Crud
 {
     protected PDO $con;
     protected string $table;
@@ -24,21 +26,26 @@ trait CRUD
             $set = $set . "$key = :$key,";
         }
         $set = rtrim($set, ",");
-        $sql = "UPDATE {$this->table} SET $set WHERE id = :id";
-        $data['id'] = $id;
+        $sql = "UPDATE {$this->table} SET $set WHERE id = $id";
 
         $stmt = $this->con->prepare($sql);
         return $stmt->execute($data);
     }
-        public function delete($id): bool {
+    public function delete($id): bool {
         $sql = "DELETE FROM {$this->table} WHERE id = :id";
         $stmt = $this->con->prepare($sql);
         return $stmt->execute([":id"=>$id]);
     }
-        public function all(): array {
+    public function all(): array {
         $sql = "SELECT * FROM {$this->table} ORDER BY id DESC";
         $stmt = $this->con->query($sql);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getById($id): array|false {
+        $stmt = $this->con->prepare("SELECT * FROM {$this->table} WHERE id = :id");
+        $stmt->execute([":id"=>$id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 }
 
