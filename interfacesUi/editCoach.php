@@ -1,10 +1,15 @@
 <?php
+session_start();
 require_once "header.php";
 require_once "../autloading/Autloading.php";
 use Bd\BaseDonne;
 use Heritage\Coach;
 
 
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== "admin") {
+    header("Location: interfaceLogin.php");
+    exit;
+}
 
 $con = BaseDonne::database();
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {

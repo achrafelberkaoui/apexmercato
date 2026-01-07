@@ -1,8 +1,15 @@
 <?php
+session_start();
 require_once "header.php";
+require_once "../autloading/Autloading.php";
 use Heritage\Coach;
 use Bd\BaseDonne;
+use ReadonlyContrat\Contract;
 
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== "admin") {
+    header("Location: interfaceLogin.php");
+    exit;
+}
 
 
 $con = BaseDonne::database();
@@ -55,8 +62,12 @@ if(empty(trim($_POST['nationalite']))){
             echo "aucun equipe id";
             exit;
             }
+        if($coach->creatNew($data)){
+        $id = $con->lastInsertId();
+        }
+        $contract = new Contract($con, null,$id_equip, $id,date("y-m-d"), null);
+        $contract->save();
 
-        $coach->creatNew($data);
         echo "<p style='color:green'>Coach ajoutée avec succès</p>";
         header("refresh:2, url=adminDash.php");
     }else{

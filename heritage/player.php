@@ -7,8 +7,8 @@ use PDO;
 require_once "../autloading/Autloading.php";
 
 class Player extends Personne{
-        private string $Role;
-        private float $ValeurMarch;
+        private ?string $Role;
+        private ?float $ValeurMarch;
      use Crud;
     public function __construct(PDO $pdo, $nom, $email, $nationalite, $role, $valeur, $id_equipe)
     {

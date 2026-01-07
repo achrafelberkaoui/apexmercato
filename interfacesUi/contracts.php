@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once "header.php";
 require_once "../autloading/Autloading.php";
 use Heritage\Coach;
@@ -7,6 +8,10 @@ use Heritage\Equipe;
 use ReadonlyContrat\Contract;
 use Bd\BaseDonne;
 
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== "admin") {
+    header("Location: interfaceLogin.php");
+    exit;
+}
 
 $con = BaseDonne::database();
 $playerObj = new Player($con, "", "", "", "", 0, 0);
@@ -46,7 +51,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     if(empty($date)) $errors[] = "Veuillez sélectionner la date du contrat";
 
     if(empty($errors)){
-        $contract = new Contract($con, $joueur_id,$equipe_id, $coach_id,$date);
+        $contract = new Contract($con, $joueur_id,$equipe_id, $coach_id,date("y-m-d"), null);
         $contract->save();
         echo "<p style='color:green'>Contrat ajouté avec succès</p>";
         header("refresh:2, url=adminDash.php");

@@ -1,11 +1,17 @@
 <?php
+session_start();
 require_once "header.php";
 require_once "../autloading/Autloading.php";
 use Bd\BaseDonne;
 use Heritage\Player;
 use Trait\Crud;
 use Heritage\Equipe;
+use ReadonlyContrat\Contract;
 
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== "admin") {
+    header("Location: interfaceLogin.php");
+    exit;
+}
 
 $con = BaseDonne::database();
 $errors = [];
@@ -61,11 +67,14 @@ if(empty(trim($_POST['nationalite']))){
             exit;
             }
 
-
-        $jouer->creatNew($data);
+        if($jouer->creatNew($data)){
+        $id = $con->lastInsertId();
+        }
+        $contract = new Contract($con, $id,$id_equip, null,date("y-m-d"), null);
+        $contract->save();
         echo "<p style='color:green'>Joueur ajoutée avec succès</p>";
         header("refresh:2, url=adminDash.php");
-    }else{
+        }else{
         foreach ($errors as $err) {
              echo "<p style='color:red'>$err</p>";
             }

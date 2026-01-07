@@ -1,18 +1,25 @@
 <?php
+session_start();
 require_once "header.php";
-?>
-<div class="journal-dashboard-container">
 
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== "journaliste") {
+    header("Location: interfaceLogin.php");
+    exit;
+}
+?>
+
+
+<div class="journal-dashboard-container">
+    
     <!-- Sidebar Navigation -->
-    <aside class="journal-sidebar">
-        <h2>Journaliste Dashboard</h2>
-        <ul>
-            <li class="journal-active" data-page="market">Marché</li>
-            <li data-page="compare">Comparaison</li>
-            <li data-page="news">Flux Privé</li>
-            <li data-page="filter">Filtrer Joueurs</li>
-        </ul>
-    </aside>
+    <?php
+    if(!$_SESSION['role'] == "journaliste"){
+        header("location:interfaceLogin.php");
+    }else{
+        
+        require_once "asideJournaliste.php";
+        }
+    ?>
 
     <!-- Main Content -->
     <main class="journal-main-content">

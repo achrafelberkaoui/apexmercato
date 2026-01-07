@@ -1,9 +1,15 @@
 <?php
+session_start();
 require_once "header.php";
 require_once "../autloading/Autloading.php";
 use Trait\Crud;
 use Heritage\Equipe;
 use Bd\BaseDonne;
+
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== "admin") {
+    header("Location: interfaceLogin.php");
+    exit;
+}
 
 $errors = [];
 $con = BaseDonne::database();

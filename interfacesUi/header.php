@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Plateforme eSport</title>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="assest/style.css">
 </head>
 <body>
 <!-- HEADER -->

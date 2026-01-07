@@ -1,10 +1,16 @@
 <?php
 require_once "header.php";
+session_start();
 require_once "../autloading/Autloading.php";
 use Bd\BaseDonne;
 use ClassFinal\FinancialEngine;
 use ClassFinal\TransferService;
 use Heritage\Transfert;
+
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== "admin") {
+    header("Location: interfaceLogin.php");
+    exit;
+}
 
 $con = BaseDonne::database();
 $players = $con->query("SELECT id,name FROM joueur")->fetchAll(PDO::FETCH_ASSOC);

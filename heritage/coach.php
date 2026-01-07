@@ -7,7 +7,7 @@ use Trait\Crud;
 require_once "../autloading/Autloading.php";
 
 class Coach extends Personne{
-        private string $styl;
+        private ?string $styl;
         private $annExp;
         use Crud;
         public function __construct(PDO $con,$nom, $email, $nationalite, $styl, $annExp, $id_equipe){

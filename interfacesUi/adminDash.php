@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require_once "header.php";
 require_once "../autloading/Autloading.php";
 use Bd\BaseDonne;
@@ -6,7 +8,6 @@ use Heritage\Player;
 use Heritage\Equipe;
 use Heritage\Coach;
 use ReadonlyContrat\Contract;
-
 
 $con = BaseDonne::database();
 $playerObj = new Player($con, "", "", "", "", 0, 0);
@@ -18,7 +19,7 @@ $coachs = $coachObj->all();
 $equipObj = new Equipe($con);
 $equips = $equipObj->all();
 
-$contrat = new Contract($con, null, null,null, "");
+$contrat = new Contract($con, NULL, NULL, NULL, date("Y-m-d"), null);
 $contratss = $contrat->allContracts();
 
 $transferts = $con->query("
@@ -37,15 +38,17 @@ $transferts = $con->query("
 <div class="dashboard-container">
 
     <!-- Sidebar Navigation -->
-    <aside class="sidebar">
-        <h2>Admin Dashboard</h2>
-        <ul>
-            <li class="active" data-page="roster">Roster</li>
-            <li data-page="teams">Équipes</li>
-            <li data-page="contracts">Contrats</li>
-            <li data-page="transfers">Transferts</li>
-        </ul>
-    </aside>
+     <?php
+    if (!isset($_SESSION['role']) || $_SESSION['role'] !== "admin") {
+        header("Location: interfaceLogin.php");
+        exit;
+    }else{
+
+        require_once "asideAdmin.php";
+        }
+    ?>
+
+
 
     <!-- Main Content -->
     <main class="main-content">
@@ -53,6 +56,11 @@ $transferts = $con->query("
         <!-- ROSTER -->
         <section id="roster" class="page active">
             <h3>PLAYERS</h3>
+            <?php if(isset($_SESSION['msg'])){
+                echo "<p style ='color:green'>" .  $_SESSION['msg'] . "<p>";
+                }
+            unset($_SESSION['msg']);
+            ?>
            <a href="ajouteJou.php" class = "btn-addJou" >Ajouter Joueur</a>
            <a href="ajouteCoach.php" class = "btn-addJou" >Ajouter Coach</a>
             <table>

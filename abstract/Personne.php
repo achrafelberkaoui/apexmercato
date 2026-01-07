@@ -1,10 +1,10 @@
 <?php
 namespace Abstract;
 abstract class Personne{
-        protected string $nom;
-        protected string $email;
-        protected string $nationalite;
-        protected int $id_equipe;
+        protected ?string $nom;
+        protected ?string $email;
+        protected ?string $nationalite;
+        protected ?int $id_equipe;
     public function __construct($nom, $email, $nationalite, $id_equipe){
         $this->nom = $nom;
         $this->email = $email;
