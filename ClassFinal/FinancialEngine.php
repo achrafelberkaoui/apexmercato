@@ -1,5 +1,5 @@
 <?php
-
+namespace ClassFinal;
 final class FinancialEngine
 {
     private float $taxRate = 0.10;     

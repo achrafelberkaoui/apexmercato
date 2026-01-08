@@ -46,6 +46,8 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
         "joueur_id" => $playerId,
         "coach_id" => $coachId
     ];
+    $TransferService = new TransferService($con);
+    $TransferService->transfPlyer($playerId, $fromTeam, $toTeam);
     $transfert->creatNew($Data);
     } else {
         foreach($errors as $e) 

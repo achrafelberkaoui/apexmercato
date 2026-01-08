@@ -86,6 +86,14 @@ $transferts = $con->query("
 
                 </tbody>
             </table>
+            <div class="pg2-wrapper">
+            <button class="pg2-btn" id="pgPrev" disabled>Précédent</button>
+
+            <span class="pg2-page" id="pgNumber">1</span>
+
+            <button class="pg2-btn" id="pgNext">Suivant</button>
+            </div>
+
 
             <!-- coach -->
                  <h3>COACHS</h3>
