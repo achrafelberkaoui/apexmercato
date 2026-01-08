@@ -6,6 +6,7 @@ require_once "../autloading/Autloading.php";
 use Bd\BaseDonne;
 use Heritage\Player;
 use Heritage\Equipe;
+use Heritage\Pagination;
 use Heritage\Coach;
 use ReadonlyContrat\Contract;
 
@@ -21,6 +22,15 @@ $equips = $equipObj->all();
 
 $contrat = new Contract($con, NULL, NULL, NULL, date("Y-m-d"), null);
 $contratss = $contrat->allContracts();
+$p = new Pagination();
+$total = $p->totalJoueur();
+$jouPag =  $p->affichagePersonne();
+$page = isset($_GET['page']) && intval($_GET['page']) ? $_GET['page'] : 1;
+$precedent =$page-1;
+$suivant =$page+1;
+$page2 = ($page - 1) * 5;
+
+
 
 $transferts = $con->query("
     SELECT t.*, 
@@ -48,8 +58,6 @@ $transferts = $con->query("
         }
     ?>
 
-
-
     <!-- Main Content -->
     <main class="main-content">
 
@@ -72,7 +80,7 @@ $transferts = $con->query("
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody><?php foreach($players as $player): ?>
+                <tbody><?php foreach($jouPag as $player): ?>
                     <tr>
                         <td><?= htmlspecialchars($player['name']) ?></td>
                         <td><?= htmlspecialchars($player['role']) ?></td>
@@ -87,11 +95,13 @@ $transferts = $con->query("
                 </tbody>
             </table>
             <div class="pg2-wrapper">
-            <button class="pg2-btn" id="pgPrev" disabled>Précédent</button>
-
-            <span class="pg2-page" id="pgNumber">1</span>
-
-            <button class="pg2-btn" id="pgNext">Suivant</button>
+                <?php if($page > 1):?>
+            <a href ="?page=<?= $precedent ?>" class="pg2-btn btn-addJou" id="pgPrev">Précédent</a>
+                <?php endif; ?>
+            <span class="pg2-page btn-addJou" id="pgNumber"> <?= $page ?> </span>
+            <?php if($page2 <= $total):?>
+            <a href ="?page=<?= $suivant ?>" class="pg2-btn btn-addJou" id="pgNext">Suivant</a>
+            <?php endif; ?>
             </div>
 
 
