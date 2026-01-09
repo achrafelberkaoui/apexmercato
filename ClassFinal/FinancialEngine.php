@@ -6,7 +6,7 @@ final class FinancialEngine
     private float $agentFeeRate = 0.05;
 
 
-    public function calculateTotalCost(float $price): float
+    public function calculateTotalCost(float $price)
     {
         $tax = $price * $this->taxRate;
         $agentFee = $price * $this->agentFeeRate;

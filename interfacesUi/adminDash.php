@@ -20,7 +20,7 @@ $coachs = $coachObj->all();
 $equipObj = new Equipe($con);
 $equips = $equipObj->all();
 
-$contrat = new Contract($con, NULL, NULL, NULL, date("Y-m-d"), null);
+$contrat = new Contract($con, NULL, NULL, NULL, date("Y-m-d"), null, 0);
 $contratss = $contrat->allContracts();
 $p = new Pagination();
 $total = $p->totalJoueur();

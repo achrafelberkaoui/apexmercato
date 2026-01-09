@@ -29,6 +29,12 @@ if(empty(trim($_POST['email']))){
     $email = trim($_POST['email']);
 }
 
+if(empty($_POST['salaire'])){
+    $errors['salaire'] = "Veuillez entrer";
+}else{
+    $salaire = $_POST['salaire'];
+}
+
 if(empty(trim($_POST['nationalite']))){
     $errors['nationalite'] = "Veuillez entrer la nationalite de Joueur";
 }else{
@@ -58,7 +64,7 @@ if(empty(trim($_POST['nationalite']))){
         "nationalite" => $nationalite,
         "role" => $role,
         "valeur_marches" => $valeur,
-        "equipe_id" => $id_equip
+        "equipe_id" => $id_equip,
     ];
 
         $jouer = new Player($con, $name, $email,  $nationalite, $role, $valeur,$id_equip);
@@ -70,7 +76,7 @@ if(empty(trim($_POST['nationalite']))){
         if($jouer->creatNew($data)){
         $id = $con->lastInsertId();
         }
-        $contract = new Contract($con, $id,$id_equip, null,date("y-m-d"), null);
+        $contract = new Contract($con, $id,$id_equip, null,date("y-m-d"), null, $salaire);
         $contract->save();
         echo "<p style='color:green'>Joueur ajoutée avec succès</p>";
         header("refresh:2, url=adminDash.php");
@@ -110,6 +116,10 @@ if(empty(trim($_POST['nationalite']))){
 
         <label>Valeur Marchande (€) :</label>
         <input type="number" name="valeur_marches" required>
+
+            <label>Salaire :</label>
+        <input type="number" name="salaire" required>
+
 
         <button type="submit" name="submit">Ajouter Joueur</button>
     </form>

@@ -13,15 +13,16 @@ class Contract {
     public readonly ?int $equipe_id;
     public readonly string $date_contrat;
     public readonly ?string $date_fin;
+    public readonly float $salaire;
 
 
-    public function __construct(PDO $con, ?int $joueur_id, ?int $equipe_id, ?int $coach_id, string $date_contrat, ?string $date_fin){
-        $this->con = $con;
+    public function __construct(PDO $con, ?int $joueur_id, ?int $equipe_id, ?int $coach_id, string $date_contrat, ?string $date_fin, float $salaire){
         $this->joueur_id = $joueur_id;
         $this->coach_id = $coach_id;
         $this->equipe_id = $equipe_id;
         $this->date_contrat = $date_contrat;
         $this->date_fin = $date_fin;
+        $this->salaire = $salaire;
         $this->conne($con, "contrat");
     }
 
@@ -31,7 +32,8 @@ class Contract {
             'coach_id' => $this->coach_id,
             'equipe_id'=> $this->equipe_id,
             'date_contrat' => $this->date_contrat,
-            'date_fin' => $this->date_fin
+            'date_fin' => $this->date_fin,
+            'Salaire' => $this->salaire
         ];
         return $this->creatNew($data);
     }

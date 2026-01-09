@@ -40,6 +40,12 @@ if(empty(trim($_POST['nationalite']))){
         $style = $_POST['style'];
     }
 
+    if(empty($_POST['salaire'])){
+        $errors['salaire'] = "Veuillez entrer";
+    }else{
+        $salaire = $_POST['salaire'];
+    }
+
     if(empty($_POST['experience']) || $_POST['experience'] <= 0){
         $errors['experience'] = "Veuillez entrer annees des experiences par mois";
     }else{
@@ -65,7 +71,7 @@ if(empty(trim($_POST['nationalite']))){
         if($coach->creatNew($data)){
         $id = $con->lastInsertId();
         }
-        $contract = new Contract($con, null,$id_equip, $id,date("y-m-d"), null);
+        $contract = new Contract($con, null,$id_equip, $id,date("y-m-d"), null, $salaire);
         $contract->save();
 
         echo "<p style='color:green'>Coach ajoutée avec succès</p>";
@@ -93,6 +99,9 @@ if(empty(trim($_POST['nationalite']))){
 
         <label>Id Equipe :</label>
         <input type="number" name="id_equip" required>
+
+        <label>Salaire :</label>
+        <input type="number" name="salaire" required>
 
         <label>Années d'expérience :</label>
         <input type="number" name="experience"  placeholder = "24 Mois" required>

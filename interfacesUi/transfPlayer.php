@@ -39,7 +39,7 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
     $transfert = New Transfert($con);
     $transfert->conne($con,"transfert");
     $msg = "<p style='color:green'>Transfert ajouté avec succès !</p>";
-        header("refresh:2, url=adminDash.php");
+        header("url=adminDash.php");
     $Data = [
         "equipeA_id" => $fromTeam,
         "equipeB_id" => $toTeam,
@@ -47,7 +47,7 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
         "coach_id" => $coachId
     ];
     $TransferService = new TransferService($con);
-    $TransferService->transfPlyer($playerId, $fromTeam, $toTeam);
+    $TransferService->transfPersonne($playerId, $coachId, $fromTeam, $toTeam, $type);
     $transfert->creatNew($Data);
     } else {
         foreach($errors as $e) 
